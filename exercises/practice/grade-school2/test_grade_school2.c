@@ -162,9 +162,13 @@ static void test_students_are_sorted_by_grades_and_names_in_roster(void)
 
 static void test_grade_is_empty_if_no_students_in_grade(void)
 {
-   // TODO: To properly test this, there should be students present in other grades
    TEST_IGNORE();
    uint8_t desired_grade = 1;
+
+   add_student("Peter", 2);
+   add_student("Zoe", 2);
+   add_student("Alex", 2);
+   add_student("Jim", 3);
 
    roster_t actual = get_grade(desired_grade);
 
