@@ -129,12 +129,46 @@ static void test_cannot_add_same_student_to_multiple_grades(void)
    check_rosters(expected, actual);
 }
 
+static void test_students_are_sorted_by_grades_in_roster(void)
+{
+   TEST_IGNORE();
+   roster_t expected = {
+      3, {
+          (student_t) {1, "Anna"},
+          (student_t) {2, "Peter"},
+          (student_t) {3, "Jim"}}
+   };
+
+   add_student("Jim", 3);
+   add_student("Peter", 2);
+   add_student("Anna", 1);
+
+   roster_t actual = get_roster();
+
+   check_rosters(expected, actual);
+}
+
+static void test_students_are_sorted_by_name_in_roster(void)
+{
+   TEST_IGNORE();
+   roster_t expected = {
+      3, {
+          (student_t) {2, "Alex"},
+          (student_t) {2, "Peter"},
+          (student_t) {2, "Zoe"}}
+   };
+
+   add_student("Peter", 2);
+   add_student("Zoe", 2);
+   add_student("Alex", 2);
+
+   roster_t actual = get_roster();
+
+   check_rosters(expected, actual);
+}
+
 static void test_students_are_sorted_by_grades_and_names_in_roster(void)
 {
-   // TODO: Ideally this should be split to 2 tests (perhaps more):
-   // TODO:  - test_students_are_sroted_by_grades
-   // TODO:  - test_students_are_sroted_by_name_in_grades
-
    TEST_IGNORE();
    roster_t expected = {
       7, {
@@ -207,6 +241,8 @@ int main(void)
    RUN_TEST(test_adding_students_in_multiple_grades);
    RUN_TEST(test_students_in_multiple_grades_are_added_to_roster);
    RUN_TEST(test_cannot_add_same_student_to_multiple_grades);
+   RUN_TEST(test_students_are_sorted_by_grades_in_roster);
+   RUN_TEST(test_students_are_sorted_by_name_in_roster);
    RUN_TEST(test_students_are_sorted_by_grades_and_names_in_roster);
    RUN_TEST(test_grade_is_empty_if_no_students_in_grade);
    RUN_TEST(test_students_are_sorted_by_names_in_grade);
